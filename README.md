@@ -1,15 +1,19 @@
-# Project Title
+# Project Title & Description
 
 URL Shortening Sample Applications using node js
 
 ### Prerequisites
-node 
-mongod
-nodemon
+*node 
+*mongod
 
-## Authors
+## Quick Start and Installation
 
-* **Mohasin Sutar** - *Initial work* - [Mohasin Sutar](https://github.com/mohasinsutar)
+```bash
+$ git clone https://github.com/mohasinsutar/url-shortener myapp
+$ cd myapp
+$ npm install
+$ node app
+```
 
 ## Acknowledgments
 
