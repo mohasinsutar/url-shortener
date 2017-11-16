@@ -11,17 +11,17 @@ var Url = require('./models/url');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var api = require('./routes/api');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'hbs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-//app.use(logger('dev'));
-app.use(logger('combined', {stream: process.stdout}));
+app.use(logger('tiny', {stream: process.stdout}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -30,8 +30,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 mongoose.connect('mongodb://' + config.db.host + '/' + config.db.name);
 app.use('/', index);
 app.use('/users', users);
+app.use('/api', api);
 
-app.post('/api/shorten', function(req, res){
+app.post('/shorten', function(req, res){
   var longUrl = req.body.url;
   var shortUrl = '';
 
@@ -99,7 +100,14 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  
+  //res.render('error'); //commented by ms
+  
+  
+  console.error(err.status);
+  console.error(err.stack);
+  res.status(500).send({status:500, message: 'internal error', type:'internal'}); 
+
 });
 
 module.exports = app;

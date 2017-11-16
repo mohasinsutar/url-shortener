@@ -1,7 +1,7 @@
 $('.btn-shorten').on('click', function(){
-  // AJAX call to /api/shorten with the URL that the user entered in the input box
+  // AJAX call to /shorten with the URL that the user entered in the input box
   $.ajax({
-    url: '/api/shorten',
+    url: '/shorten',
     type: 'POST',
     dataType: 'JSON',
     data: {url: $('#url-field').val()},
@@ -10,8 +10,8 @@ $('.btn-shorten').on('click', function(){
         var resultHTML = '<a class="result" href="' + data.shortUrl + '">'
             + data.shortUrl + '</a>';
         $('#link').html(resultHTML);
-        $('#link').hide().fadeIn('slow');
+        $('#resultBox').addClass("alert alert-success");
+        $('#resultBox').hide().fadeIn('slow');
     }
   });
-
 });
